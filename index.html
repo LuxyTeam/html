@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacked by @im.felix409</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarpanch&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos para centrar todo */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+            color: #411;
+            font-family: Consolas, Courier, monospace;
+            font-size: 5vw; /* Tamaño de fuente responsivo */
+            text-shadow: 0 0 15px #411;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* Contenedor del texto */
+        #loading {
+            text-align: center;
+        }
+
+        /* Efecto de glow para las letras */
+        .glow {
+            color: #f00;
+            text-shadow: 0px 0px 10px #f00;
+        }
+
+        /* Estilo para los spans */
+        span {
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        /* Estilo para la imagen y el texto */
+        #image-container {
+            display: none;
+            text-align: center;
+        }
+
+        #image-container svg {
+            width: 20vw; /* Tamaño de imagen responsivo */
+            height: 20vw; /* Tamaño de imagen responsivo */
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 10px cyan) drop-shadow(0 0 20px cyan);
+        }
+        .phrase {
+            font-weight: 100;
+            font-size: 2.5vw; /* Tamaño de fuente responsivo */
+            color: #FAFAFA;
+            font-family: Iceland;
+            text-shadow: 0 0 0.5em cyan, 0 0 0.5em cyan;
+        }
+
+        /* Estilo para las palabras que aparecerán y desaparecerán */
+        .char-item {
+            position: absolute;
+            font-family: Arial, sans-serif;
+            font-size: 2vw; /* Tamaño de fuente responsivo */
+            color: white;
+            text-shadow: 0 0 10px #f00;
+            opacity: 0;
+            pointer-events: none;
+            animation: fall 3s forwards; /* Animación para hacer que caigan */
+        }
+
+        /* Animación para las palabras que caen */
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh); /* Comienzan desde abajo */
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh); /* Se mueven hacia arriba */
+            }
+        }
+
+        #message {
+            color: white;
+            -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+            font-family: 'Sarpanch', sans-serif;
+            font-size: 2vw; /* Tamaño de fuente responsivo */
+        }
+
+        /* Media queries para ajustes adicionales en pantallas pequeñas */
+        @media (max-width: 768px) {
+            html, body {
+                font-size: 8vw; /* Aumentar el tamaño de la fuente en pantallas pequeñas */
+            }
+
+            .phrase {
+                font-size: 4vw; /* Aumentar el tamaño de la fuente en pantallas pequeñas */
+            }
+
+            #message {
+                font-size: 4vw; /* Aumentar el tamaño de la fuente en pantallas pequeñas */
+            }
+
+            #image-container svg {
+                width: 30vw; /* Aumentar el tamaño de la imagen en pantallas pequeñas */
+                height: 30vw; /* Aumentar el tamaño de la imagen en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">@im.felix409</div>
+
+    <div id="image-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xml:space="preserve"><path fill="#FBFBFB" d="M157.766 192.252c18.996 7.692 28.825 21.833 29.812 41.566.577 11.517-3.033 18.118-15.916 17.136-4.113-.314-8.26-.367-12.34-.925-12.74-1.742-25.385-1.459-38.077.666-4.21.704-8.667.564-12.939.121-6.782-.702-11.215-7.085-10.744-15.933.78-14.689 6.207-27.19 18.412-36.202 12.698-9.376 26.602-10.825 41.792-6.429m186.474-.016c24.3-7.301 47.605 3.161 56.529 26.137 2.593 6.678 2.825 14.557 2.807 21.882-.016 6.74-5.16 10.863-11.951 10.612-11.413-.42-22.808-1.758-34.214-1.81-9.381-.044-18.766 1.249-28.153 1.89-11.65.797-14.716-5.914-14.888-14.768-.36-18.545 9.342-35.867 29.87-43.943"/><path fill="#F2F1F2" d="M262.254 308.128c-19.895 3.537-37.073-1.628-52.05-14.229-1.91-1.606-3.819-4.628-3.725-6.912.203-4.96 5.532-6.18 9.718-2.391 8.603 7.788 18.432 12.596 30.131 13.62 13.403 1.172 25.114-2.71 35.489-11.047 1.547-1.243 3.01-2.594 4.499-3.91 2.72-2.404 5.543-2.173 7.998.158 2.854 2.71 1.464 5.67-.66 7.878-7.15 7.426-15.855 12.413-25.69 15.428-1.735.531-3.536.848-5.71 1.405"/></svg>
+        <div class="phrase" id="phrase"></div>
+        <br>
+        
+        <div id="message">
+            It's better to have a Good Security NO more, than<span style="color: red;">fooling</span>everyone including yourselves & have one
+        </div>                      
+    </div>
+
+    <script>
+        class TextScramble {
+            constructor(el) {
+                this.el = el;
+                this.chars = '!@#$%^&*()_-=+{}:"|<>?,./;';
+                this.update = this.update.bind(this);
+            }
+            setText(newText) {
+                const oldText = this.el.innerText;
+                const length = Math.max(oldText.length, newText.length);
+                const promise = new Promise((resolve) => (this.resolve = resolve));
+                this.queue = [];
+                for (let i = 0; i < length; i++) {
+                    const from = oldText[i] || "";
+                    const to = newText[i] || "";
+                    const start = Math.floor(Math.random() * 40);
+                    const end = start + Math.floor(Math.random() * 40);
+                    this.queue.push({ from, to, start, end });
+                }
+                cancelAnimationFrame(this.frameRequest);
+                this.frame = 0;
+                this.update();
+                return promise;
+            }
+            update() {
+                let output = "";
+                let complete = 0;
+                for (let i = 0, n = this.queue.length; i < n; i++) {
+                    let { from, to, start, end, char } = this.queue[i];
+                    if (this.frame >= end) {
+                        complete++;
+                        output += to;
+                    } else if (this.frame >= start) {
+                        if (!char || Math.random() < 0.28) {
+                            char = this.randomChar();
+                            this.queue[i].char = char;
+                        }
+                        output += `<span class="dud">${char}</span>`;
+                    } else {
+                        output += from;
+                    }
+                }
+                this.el.innerHTML = output;
+                if (complete === this.queue.length) {
+                    this.resolve();
+                } else {
+                    this.frameRequest = requestAnimationFrame(this.update);
+                    this.frame++;
+                }
+            }
+            randomChar() {
+                return this.chars[Math.floor(Math.random() * this.chars.length)];
+            }
+        }
+
+        // Array de caracteres para el efecto
+        alphabet = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        letter_count = 0;
+        el = $("#loading");
+        word = el.html().trim();
+        finished = false;
+
+        // Reemplazar el contenido con spans
+        el.html("");
+        for (var i = 0; i < word.length; i++) {
+            el.append("<span>" + word.charAt(i) + "</span>");
+        }
+
+        // Iniciar los efectos
+        setTimeout(write, 30); // Reducción del tiempo
+        incrementer = setTimeout(inc, 400); // Reducción del tiempo
+
+        // Función para escribir caracteres aleatorios
+        function write() {
+            for (var i = letter_count; i < word.length; i++) {
+                var c = Math.floor(Math.random() * 36);
+                $("span")[i].innerHTML = alphabet[c];
+            }
+            if (!finished) {
+                setTimeout(write, 30); // Reducción del tiempo
+            }
+        }
+
+        // Función para revelar las letras una por una
+        function inc() {
+            $("span")[letter_count].innerHTML = word[letter_count];
+            $("span").eq(letter_count).addClass("glow");
+            letter_count++;
+            if (letter_count >= word.length) {
+                finished = true;
+                setTimeout(showImage, 600); // Después de que la animación termine, mostrar la imagen
+            } else {
+                setTimeout(inc, 400); // Reducción del tiempo
+            }
+        }
+
+        // Función para mostrar la imagen y las frases
+        const phraseElement = document.getElementById('phrase');
+        const scramble = new TextScramble(phraseElement);
+        const phrases = [
+            'We are Anonymous.',
+            'We are Legion.',
+            'We do not forgive.',
+            'We do not forget.',
+            'Expect us.',
+            'Mess with the best die like the rest.',
+            'We Talk here.'
+        ];
+        
+        let phraseIndex = 0;
+
+        function showImage() {
+            $("#loading").fadeOut(500, function() {
+                $(this).remove();
+                $("#image-container").fadeIn(500);
+            });
+            
+            let currentPhrase = phrases[phraseIndex];
+            scramble.setText(currentPhrase);
+            phraseIndex++;
+            if (phraseIndex >= phrases.length) {
+                phraseIndex = 0;
+            }
+            
+            setTimeout(showImage, 3000);
+
+        }
+        </script>      
+</body>
+</html>
